@@ -202,7 +202,7 @@ namespace laba12
                         {
                             Console.WriteLine("\n4 - Печать списка");
                             instrumentsList.Print();
-                            Console.WriteLine("Печать списка завершена ");
+                            Console.WriteLine("Печать списка завершена");
                         }
                         break;
                     case 5:
