@@ -208,13 +208,7 @@ namespace laba12
                     case 5:
                         {
                             Console.WriteLine("\n5 - Добавление в список элементов с номерами 1, 3, 5 и т.д.");
-                            if (PointBiList.GetCount(beg) >= PointBiList.maxCount)
-                            {
-                                Console.WriteLine("Ошибка! Список имеет не меньше 100 элементов");
-                                Console.WriteLine("Добавление в список элементов с номерами 1, 3, 5 и т.д. не завершено");
-                                break;
-                            }
-                            beg = PointBiList.AddOddObjects(beg);
+                            instrumentsList = DoublyLinkedList<MusicalInstrument>.AddOddObjects(instrumentsList);
                             Console.WriteLine("Добавление в список элементов с номерами 1, 3, 5 и т.д. завершено");
                         }
                         break;
