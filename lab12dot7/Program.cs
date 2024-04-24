@@ -15,7 +15,7 @@ namespace laba12
             Random rand = new Random();
             while (true)
             {
-                int pointsCaseMenu = 7;
+                int pointsCaseMenu = 8;
 
                 Console.WriteLine("\nМеню работы с двунаправленным списком");
                 Console.WriteLine("1 - Формирование двунаправленного списка");
@@ -25,6 +25,7 @@ namespace laba12
                 Console.WriteLine("5 - Добавление в список элементов с номерами 1, 3, 5 и т.д.");
                 Console.WriteLine("6 - Удаление списка из памяти");
                 Console.WriteLine("7 - Очистка истории");
+                Console.WriteLine("8 - Клонирование списка");
                 Console.WriteLine("0 - Выход из меню");
 
                 int choiceCaseMenu = InputInt(0, pointsCaseMenu);
@@ -129,55 +130,9 @@ namespace laba12
                         break;
                     case 3:
                         {
-                            ////Console.WriteLine("Введите имя");
-                            ////string startName = Console.ReadLine(); // Имя, с которого начинается удаление
-                            ////instrumentsList = RemoveFrom(startName, instrumentsList);
-                            //Console.WriteLine("\nУдаление элементов из списка:");
+                            
 
-                            //Console.WriteLine("Введите имя элемента для удаления:");
-                            //string nameToRemove = Console.ReadLine();
-                            //bool removed;
-                            //// Проверяем, есть ли элемент с заданным именем в списке
-                            //Node<MusicalInstrument> elementToRemove = instrumentsList.FindByName(nameToRemove);
-                            //if (elementToRemove == null)
-                            //{
-                            //    Console.WriteLine("Элемент с именем '{0}' не найден в списке.", nameToRemove);
-                            //}
-                            //else
-                            //{
-                            //    // Вызываем функцию удаления элементов из списка, начиная с элемента с заданным именем
-                            //    //bool removed = instrumentsList.RemoveFrom(nameToRemove);
-
-                            //        // Поиск первого элемента с заданным именем
-                            //        Node<MusicalInstrument> current = instrumentsList.FindByName(nameToRemove);
-
-                            //        // Если элемент с заданным именем не найден, возвращаем false
-                            //        if (current == null)
-                            //        {
-                            //            Console.WriteLine("Элемент с именем '{0}' не найден в списке.", nameToRemove);
-                            //        removed = false;
-                            //        }
-
-                            //        // Удаление элементов, начиная с найденного элемента и до конца списка
-                            //        while (current != null)
-                            //        {
-                            //            Node<MusicalInstrument> next = current.Next; // Сохраняем ссылку на следующий элемент перед удалением текущего
-                            //            instrumentsList.Remove(current); // Удаляем текущий элемент
-                            //            current = next; // Переходим к следующему элементу
-                            //        }
-
-                            //        Console.WriteLine("Элементы, начиная с элемента с именем '{0}', были удалены из списка.", nameToRemove);
-                            //    removed = true; // Возвращаем true, чтобы указать, что удаление выполнено успешно
-
-                            //    if (removed)
-                            //    {
-                            //        Console.WriteLine("Элементы, начиная с элемента с именем '{0}', были успешно удалены из списка.", nameToRemove);
-                            //    }
-                            //    else
-                            //    {
-                            //        Console.WriteLine("Не удалось удалить элементы, начиная с элемента с именем '{0}'.", nameToRemove);
-                            //    }
-                            //}
+                            
                             Console.WriteLine("\n3 - Удаление элементов из списка");
 
                             // Запрашиваем у пользователя имя элемента для удаления
@@ -225,32 +180,20 @@ namespace laba12
                             Console.WriteLine("История была очищена");
                         }
                         break;
+                    case 8:
+                        {
+                            Console.WriteLine("\nВывод клонированного списка:");
+                            DoublyLinkedList<MusicalInstrument> clonedList = instrumentsList.DeepClone();
+                            clonedList.Print();
+                            Console.WriteLine("\nВывод оригинального списка списка:");
+                            instrumentsList.Print();
+                            break;
+                        }
                 }
             }
 
         }
-        //public bool RemoveFrom(string name, DoublyLinkedList<MusicalInstrument> instrumentsList)
-        //{
-        //    // Проверяем, есть ли элемент с заданным именем в списке
-        //    Node<MusicalInstrument> elementToRemove = instrumentsList.FindByName(name);
-        //    if (elementToRemove == null)
-        //    {
-        //        Console.WriteLine("Элемент с именем '{0}' не найден в списке.", name);
-        //        return false; // Возвращаем false, так как элемент не найден
-        //    }
-
-        //    // Удаление всех элементов, начиная с элемента с заданным именем, и до конца списка
-        //    while (elementToRemove != null)
-        //    {
-        //        Node<MusicalInstrument> next = elementToRemove.Next; // Сохраняем ссылку на следующий элемент перед удалением текущего
-        //        instrumentsList.Remove(elementToRemove); // Удаляем текущий элемент
-        //        elementToRemove = next; // Переходим к следующему элементу
-        //    }
-
-        //    Console.WriteLine("Элементы, начиная с элемента с именем '{0}', были удалены из списка.", name);
-        //    instrumentsList.Print();
-        //    return true; // Возвращаем true, чтобы указать, что удаление выполнено успешно
-        //}
+        
         private static int InputInt(int min, int max)
         {
             int number;
