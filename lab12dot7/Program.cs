@@ -1,4 +1,4 @@
-﻿using _10lablib;
+﻿
 using laba12;
 using System.ComponentModel.Design;
 using лаба10;
