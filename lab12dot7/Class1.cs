@@ -56,34 +56,36 @@ namespace lab12dot7
                 if (elementToRemove == null)
                 {
                     Console.WriteLine("Элемент с именем '{0}' не найден в списке.", name);
-                    return false; // Возвращаем false, так как элемент не найден
+                    return false;
                 }
 
                 // Удаление всех элементов, начиная с элемента с заданным именем, и до конца списка
                 while (elementToRemove != null)
                 {
-                    Node<T> next = elementToRemove.Next; // Сохраняем ссылку на следующий элемент перед удалением текущего
-                    Remove(elementToRemove); // Удаляем текущий элемент
-                    elementToRemove = next; // Переходим к следующему элементу
+                    Node<T> next = elementToRemove.Next;
+                    Remove(elementToRemove);
+                    elementToRemove = next;
                 }
 
                 Console.WriteLine("Элементы, начиная с элемента с именем '{0}', были удалены из списка.", name);
-                return true; // Возвращаем true, чтобы указать, что удаление выполнено успешно
+                return true;
             }
             catch { Console.WriteLine("Ошибка"); return false; }
         }
 
         public void Print()
         {
-            try
-            {
+            
                 Node<T> current = Head;
-                while (current != null)
-                {
-                    Console.WriteLine(current.Data.ToString());
-                    current = current.Next;
-                }
-            } catch { Console.WriteLine("Ошибка!"); }
+                
+
+                    while (current != null)
+                    {
+                        Console.WriteLine(current.Data.ToString());
+                        current = current.Next;
+                    }
+                
+            
         }
 
         public int Count
@@ -130,14 +132,14 @@ namespace lab12dot7
                 Tail = node.Previous;
         }
         
-        public int GetCount(DoublyLinkedList<T> beg)
+        public int GetCount()
         {
             int i = 0;
             Node<T> p = Head;
             while (p != null)
             {
                 i++;
-                p = p.Next; // переход к следующему элементу
+                p = p.Next; 
             }
             return i;
         }
@@ -189,7 +191,7 @@ namespace lab12dot7
                 // Вставляем новый узел между текущим и следующим узлом
                 newNode.Next = current.Next;
                 newNode.Previous = current;
-                current.Next.Previous = newNode; // Обновляем Previous у следующего узла
+                current.Next.Previous = newNode; 
                 current.Next = newNode;
             }
 
@@ -252,14 +254,14 @@ namespace lab12dot7
         
         public static DoublyLinkedList<T> AddOddObjects(DoublyLinkedList<T> list)
         {
-            if (list.GetCount(list) >= 1000)
+            if (list.GetCount() >= 1000)
             {
                 Console.WriteLine("Ошибка! Список имеет не меньше 100 элементов");
                 Console.WriteLine("Добавление в список элементов с номерами 1, 3, 5 и т.д. не завершено");
                 return list;
             }
 
-            int count = list.GetCount(list);
+            int count = list.GetCount();
             for (int i = count + 1; i <= count * 2; i += 2)
             {
                 list = AddElementAtIndex(list, GenerateRandomData(), i);

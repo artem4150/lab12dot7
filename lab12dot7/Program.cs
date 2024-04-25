@@ -13,6 +13,175 @@ namespace laba12
         {
             DoublyLinkedList<MusicalInstrument> instrumentsList = new DoublyLinkedList<MusicalInstrument>();
             Random rand = new Random();
+            //MusicalInstrument[] instruments = new MusicalInstrument[10]; // Замените размер массива и инициализацию элементов в соответствии с вашими объектами
+            
+            int arraySize = 10; // Размер массива
+
+            MusicalInstrument[] instrumentsArray = new MusicalInstrument[arraySize];
+
+            
+
+            // Заполнение массива рандомными объектами MusicalInstrument
+            for (int i = 0; i < arraySize; i++)
+            {
+                switch (rand.Next(3)) // Выбор случайного инструмента
+                {
+                    case 0:
+                        instrumentsArray[i] = new Guitar();
+                        break;
+                    case 1:
+                        instrumentsArray[i] = new Piano();
+                        break;
+                    case 2:
+                        instrumentsArray[i] = new ElectricGuitar();
+                        break;
+                }
+
+                // Инициализация объекта
+                instrumentsArray[i].RandomInit();
+            }
+            BalancedBinaryTree<MusicalInstrument> tree = new BalancedBinaryTree<MusicalInstrument>(instrumentsArray);
+
+            while (true)
+            {
+                int pointsMainMenu = 4;
+
+                Console.WriteLine("\nМеню приложения:");
+
+                Console.WriteLine("1 - Меню работы с двунаправленным списком");
+                Console.WriteLine("2 - Меню работы с идеально сбалансированным деревом");
+                Console.WriteLine("3 - ");
+                Console.WriteLine("0 - Выйти из приложения");
+
+                int choiceMainMenu = InputInt(0, pointsMainMenu);
+
+                if (choiceMainMenu == 0)
+                {
+                    Console.WriteLine("\n0 - Выход из приложения");
+                    break;
+                }
+
+                switch (choiceMainMenu)
+                {
+                    case 1:
+                        BiCaseMenu(ref instrumentsList);
+                        break;
+                    case 2:
+                        TreeCaseMenu(ref tree);
+                        break;
+                    case 3:
+
+                        break;
+                    case 4:
+
+                        break;
+
+
+
+                }
+            }
+        }
+        
+        private static int InputInt(int min, int max)
+        {
+            int number;
+            bool inputCheck;
+            do
+            {
+                Console.Write("Ввод: ");
+                inputCheck = int.TryParse(Console.ReadLine(), out number) && number >= min && number <= max;
+                if (!inputCheck) Console.WriteLine("Ошибка ввода! Введите целое число в пределах от {0} до {1} (включительно)", min, max);
+            } while (!inputCheck);
+            return number;
+        }
+        private static void TreeCaseMenu(ref BalancedBinaryTree<MusicalInstrument> tree)
+        {
+            while (true)
+            {
+                int pointsCaseMenu = 7;
+
+                Console.WriteLine("\nМеню работы с идеально сбалансированным деревом:");
+                Console.WriteLine("1 - Формирование дерева");
+                Console.WriteLine("2 - Добавление элемента в дерево");
+                Console.WriteLine("3 - Печать дерева");
+                Console.WriteLine("4 - Поиск максимального элемента в дереве");
+                Console.WriteLine("5 - Удаление дерева из памяти");
+                Console.WriteLine("6 - Создание дерева поиска");
+                Console.WriteLine("7 - Очистка истории");
+                Console.WriteLine("0 - Выход из меню");
+
+                int choiceCaseMenu = InputInt(0, pointsCaseMenu);
+
+                if (choiceCaseMenu == 0)
+                {
+                    Console.WriteLine("\n0 - Выход из меню");
+                    break;
+                }
+
+                switch (choiceCaseMenu)
+                {
+                    case 1:
+                        {
+                            // 1. Сформировать идеально сбалансированное бинарное дерево
+                            //MusicalInstrument[] instruments = new MusicalInstrument[10]; // Замените размер массива и инициализацию элементов в соответствии с вашими объектами
+                            //BalancedBinaryTree<MusicalInstrument> tree = new BalancedBinaryTree<MusicalInstrument>(instruments);
+
+                            // 2. Распечатать полученное дерево
+                            Console.WriteLine("Идеально сбалансированное бинарное дерево:");
+                            tree.PrintLevelOrder();
+
+                            // 3. Выполнить обработку дерева
+                            MusicalInstrument maxInstrument = tree.FindMax();
+                            Console.WriteLine("Максимальный элемент в дереве: " + maxInstrument);
+
+                            // 4. Преобразовать в дерево поиска
+                            BalancedBinaryTree<MusicalInstrument> searchTree = tree.Balance();
+
+                            // 5. Распечатать полученное дерево поиска
+                            Console.WriteLine("\nПреобразованное дерево поиска:");
+                            searchTree.PrintLevelOrder();
+                        }
+                
+                        break;
+                    case 2:
+                        {
+                            
+                        }
+                        break;
+                    case 3:
+                        {
+                            
+                        }
+                        break;
+                    case 4:
+                        {
+                            
+                        }
+                        break;
+                    case 5:
+                        {
+                      
+                        }
+                        break;
+                    case 6:
+                        {
+                            
+                        }
+                        break;
+                    case 7:
+                        {
+                            Console.Clear();
+                            Console.WriteLine("История была очищена");
+                        }
+                        break;
+                }
+            }
+        }
+
+        private static void BiCaseMenu(ref DoublyLinkedList<MusicalInstrument> instrumentsList)
+        {
+
+            Random rand = new Random();
             while (true)
             {
                 int pointsCaseMenu = 8;
@@ -43,7 +212,7 @@ namespace laba12
                             Console.WriteLine("\n1 - Формирование двунаправленного списка");
                             Console.WriteLine("Введите количество объектов для формирования списка:");
                             int number = InputInt(1, 100);
-                            
+
                             Console.WriteLine("Список:");
                             for (int i = 0; i < number; i++)
                             {
@@ -91,7 +260,7 @@ namespace laba12
                             Console.WriteLine("3 - Гитара");
                             Console.WriteLine("4 - Музыкальный инструмент");
 
-                            int z  = InputInt(0, 4);
+                            int z = InputInt(0, 4);
                             switch (z)
                             {
                                 case 1:
@@ -124,15 +293,15 @@ namespace laba12
                                     break;
                             }
 
-                            
+
                             Console.WriteLine("Добавление элемента в список завершено");
                         }
                         break;
                     case 3:
                         {
-                            
 
-                            
+
+
                             Console.WriteLine("\n3 - Удаление элементов из списка");
 
                             // Запрашиваем у пользователя имя элемента для удаления
@@ -170,7 +339,7 @@ namespace laba12
                     case 6:
                         {
                             Console.WriteLine("\n6 - Удаление списка из памяти");
-                            instrumentsList = null;
+                            instrumentsList.Clear();
                             Console.WriteLine("Удаление списка из памяти завершено");
                         }
                         break;
@@ -183,7 +352,7 @@ namespace laba12
                     case 8:
                         {
                             Console.WriteLine("\nВывод клонированного списка:");
-                            DoublyLinkedList<MusicalInstrument> clonedList = instrumentsList.DeepClone();
+                            DoublyLinkedList<MusicalInstrument> clonedList = instrumentsList.Clone(instrumentsList);
                             clonedList.Print();
                             Console.WriteLine("\nВывод оригинального списка списка:");
                             instrumentsList.Print();
@@ -192,82 +361,6 @@ namespace laba12
                 }
             }
 
-        }
-        
-        private static int InputInt(int min, int max)
-        {
-            int number;
-            bool inputCheck;
-            do
-            {
-                Console.Write("Ввод: ");
-                inputCheck = int.TryParse(Console.ReadLine(), out number) && number >= min && number <= max;
-                if (!inputCheck) Console.WriteLine("Ошибка ввода! Введите целое число в пределах от {0} до {1} (включительно)", min, max);
-            } while (!inputCheck);
-            return number;
-        }
-        
-
-        static void tusk1()
-        {
-            // Создание списка и добавление объектов
-            DoublyLinkedList<MusicalInstrument> instrumentsList = new DoublyLinkedList<MusicalInstrument>();
-            instrumentsList.AddLast(new ElectricGuitar("батарейки", "Fender Stratocaster", 6, 1));
-            instrumentsList.AddLast(new Piano(88, "Yamaha Grand Piano", "октавная", 2));
-            // Добавьте сюда другие объекты из иерархии классов
-
-            // Распечатка списка
-            Console.WriteLine("Список музыкальных инструментов:");
-            instrumentsList.Print();
-
-            // Добавление элементов с номерами 1, 3, 5 и т.д.
-            Random rnd = new Random();
-            for (int i = 1; i <= instrumentsList.Count; i += 2)
-            {
-                // Создание объекта для добавления в список
-                MusicalInstrument newItem;
-                if (i % 2 == 0)
-                {
-                    newItem = new ElectricGuitar("USB", $"Custom Guitar {i}", rnd.Next(6, 12), i + 1);
-                }
-                else
-                {
-                    newItem = new Piano(76, $"Digital Piano {i}", "шкальная", i + 1);
-                }
-                instrumentsList.AddLast(newItem);
-            }
-
-            // Удаление из списка всех элементов, начиная с элемента с заданным именем, и до конца списка
-            string startName = "Custom Guitar 3"; // Имя, с которого начинается удаление
-
-            Node<MusicalInstrument> current = instrumentsList.FindByName(startName);
-            while (current != null)
-            {
-                Node<MusicalInstrument> next = current.Next;
-                instrumentsList.Remove(current);
-                current = next;
-            }
-
-            // Распечатка списка после удаления
-            Console.WriteLine("\nСписок музыкальных инструментов после обработки:");
-            instrumentsList.Print();
-
-            // Глубокое клонирование списка
-            DoublyLinkedList<MusicalInstrument> clonedList = new DoublyLinkedList<MusicalInstrument>();
-            Node<MusicalInstrument> currentCloned = instrumentsList.Head;
-            while (currentCloned != null)
-            {
-                MusicalInstrument clonedItem = (MusicalInstrument)currentCloned.Data.Clone();
-                clonedList.AddLast(clonedItem);
-                currentCloned = currentCloned.Next;
-            }
-            Console.WriteLine("\nВывод клонированного списка:");
-            clonedList.Print();
-
-            // Очистка памяти, освобождение ресурсов
-            instrumentsList.Clear();
-            Console.WriteLine("\nВывод удаленного списка:");
-            instrumentsList.Print();
         }
     }
 }
